@@ -1,0 +1,31 @@
+/** Indian hair 8, Brazilian hair 5, SEA hair 5, Synthetic hair 11, Long wig 9, short wig 4, lace glue 10, lace spray 10, edge control 10, hair gel 8, hair spray 10, satin wrap 20, edge band 25, flat iron 10, curling iron 13**/
+
+create table BeautyHair (id integer primary key, item text, qty_sold integer, qty_available integer, price integer);
+
+insert into beautyhair values 
+(1,'Indian Hair Bundles’ ,4, 4,1 80.00),
+(2, "Brazilian Hair Bundles, 5, 0, 150.00),
+(4, "Synthetic Hair", 2, 9, 70.00),
+(5, "Long Wig", 7, 2, 210.00),
+(6, "Short Wig", 2, 2, 120.00),
+(7, "Lace glue", 8, 2, 25.00),
+(8, "Lace spray", 6, 4, 15.00),
+(9, "Edge control", 4, 6, 10.00),
+(10, "Hair gel", 3, 5, 8.00),
+(11, "Hair spray", 5, 5, 11.00),
+(12, "Satin wrap", 9, 11, 10.00),
+(13, "Edge band", 20, 5, 6.00),
+(14, "Flat iron", 6, 4, 35.00),
+(15, "Curling iron", 6, 7, 28.00),
+(3, "SEA Hair Bundles”, 4,1, 220.00);
+
+select * from beautyhair; 
+
+—Sort items price from high to low.
+select * from beautyhair order by price desc;
+
+—What item sold the most?
+select item, max(qty_sold) from beautyhair group by item order by qty_sold desc;
+
+—What was the most popular texture?
+select * from beautyhair where item like "%Bu%" order by qty_sold desc;
