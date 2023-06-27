@@ -92,6 +92,6 @@ select player_name, max(score),
         when score >= 400 then 'Gold Player'
         when score >= 300 then 'Silver Player'
         else 'Bronze Player'
-end as 'Game_Rank_Status'
+end as 'Player_Rank'
 from card_games group by player_name order by score desc;
 
