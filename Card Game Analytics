@@ -64,20 +64,28 @@ INSERT INTO card_games(date_played,game_name,player_name,score) VALUES ('2015/03
 
 select * from card_games;
 
+ --What is the total number of players? --Use distinct b/c players name is listed in table multiple times.--
 select count(distinct(player_name)) as 'number of players' from card_games;
 
+--List of players names --Use distinct b/c players name is listed in table multiple times.--
 select distinct (player_name) from card_games;
 
+--What is the highest score of each game? --Use distinct b/c game name is listed in table multiple times.--
 select distinct(game_name), max(score) from card_games group by game_name order by score desc;
 
-select player_name, max(score) from card_games;
+--What player scored the highest score and what game was it?--
+select player_name, game_name, max(score) from card_games;
 
-select distinct(player_name), avg(score) as 'score_avg' from card_games group by player_name order by avg(score) desc;
+--What is the avg score of each player?--
+select distinct(player_name), round(avg(score)) as 'score_avg' from card_games group by player_name order by avg(score) desc;
 
-select min(score) from card_games;
+--What player scored the lowest score and what game was it?--
+select player_name, game_name, min(score) from card_games;
 
-select player_name, max(score) as top_winners from card_games group by player_name having score >500 order by top_winners desc;
+--Who are the top 3 players?--
+select player_name, round(avg(score)) as top_winners from card_games group by player_name having round(avg(score)) > 236 order by top_winners desc;
 
+--How do the player's rank?--
 select player_name, max(score), 
     case
         when score >= 500 then 'Platinum Player'
@@ -87,4 +95,5 @@ select player_name, max(score),
 end as 'Game_Rank_Status'
 from card_games group by game_rank_status order by score desc;
 
-select game_name, score, player_name from card_games where score >= 500 or score < 50 group by game_name;
+--What player had the best score and what player had the worst score?--
+select distinct(game_name), max(score) as 'score', player_name from card_games where score >= 500 or score < 1 group by game_name order by score desc;
