@@ -85,7 +85,7 @@ select player_name, game_name, min(score) from card_games;
 --Who are the top 3 players?--
 select player_name, round(avg(score)) as top_winners from card_games group by player_name having round(avg(score)) > 236 order by top_winners desc;
 
---How do the player's rank?--
+--How do the players rank?--
 select player_name, max(score), 
     case
         when score >= 500 then 'Platinum Player'
@@ -93,7 +93,5 @@ select player_name, max(score),
         when score >= 300 then 'Silver Player'
         else 'Bronze Player'
 end as 'Game_Rank_Status'
-from card_games group by game_rank_status order by score desc;
+from card_games group by player_name order by score desc;
 
---What player had the best score and what player had the worst score?--
-select distinct(game_name), max(score) as 'score', player_name from card_games where score >= 500 or score < 1 group by game_name order by score desc;
